@@ -1,14 +1,24 @@
-import pika
+from src.consumers.rabbitmq import RabbitMQConsumer
+from src.consumers.ray import RayConsumer
+from src.utilities.logger import logger
+from src.utilities.settings import SETTINGS
+import src.tasks
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-channel = connection.channel()
+logger.info(f"Broker type is {SETTINGS.BROKER_TYPE}")
 
-channel.queue_declare(queue='hello')
+match SETTINGS.BROKER_TYPE:
 
-def callback(ch, method, properties, body):
-    print(f" [x] Received {body}")
+    case "rabbitmq":
 
-channel.basic_consume(queue='hello', on_message_callback=callback, auto_ack=True)
+        RabbitMQConsumer().consume()
 
-print(' [*] Waiting for messages. To exit press CTRL+C')
-channel.start_consuming()
+    case "ray":
+
+        RayConsumer().consume()
+
+    case "pulsar":
+
+        PulsarConsumer().consume()
+
+    case _:
+        pass
