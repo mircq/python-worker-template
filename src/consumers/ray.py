@@ -1,10 +1,10 @@
 import ray
 
-from src.consumers.base import ConsumerBase
+from src.consumers.base import BaseConsumer
 from src.utilities.settings import SETTINGS
 
 
-class RayConsumer(ConsumerBase):
+class RayConsumer(BaseConsumer):
     """
     Ray-based task consumer.
     """

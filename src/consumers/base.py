@@ -1,5 +1,5 @@
 
-class ConsumerBase:
+class BaseConsumer:
     """
     Abstract base class for consumers.
     """
