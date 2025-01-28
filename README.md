@@ -64,7 +64,7 @@ After Docker has been installed and launched, run the following command from pro
 docker compose up
 ```
 
-If you want to start the consumer only, launch the following command:
+If you want to start the consumer locally, launch the following command:
 
 ```shell
 python main.py
