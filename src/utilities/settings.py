@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import Field
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings
 
 
@@ -16,6 +16,10 @@ class Settings(BaseSettings):
 	BROKER_HOST: str = Field()
 
 	BROKER_PORT: int = Field()
+
+	BROKER_USER: str = Field()
+
+	BROKER_PASSWORD: SecretStr = Field()
 
 	BROKER_QUEUE: str = Field()
 

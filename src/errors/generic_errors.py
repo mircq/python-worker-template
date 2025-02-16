@@ -42,14 +42,15 @@ class GenericErrors:
 	@staticmethod
 	def missing_function_error() -> Error:
 		"""
-        Creates a missing function error with 422 as status code.
+		Creates a missing function error with 422 as status code.
 
-        :return: an Error object with the given details.
-        :rtype: Error
-        """
+		:return: an Error object with the given details.
+		:rtype: Error
+		"""
 
 		logger.error(
-			msg="No function provided. Please specify the function to be executed in the 'function_name' parameter.")
+			msg="No function provided. Please specify the function to be executed in the 'function_name' parameter."
+		)
 
 		return Error(
 			message="No function provided. Please specify the function to be executed in the 'function_name' parameter.",
