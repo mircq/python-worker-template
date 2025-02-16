@@ -26,8 +26,12 @@ This repo is still a work in progress!
 
 
 ## Project description
-This project is intended to be as a template worker. This worker consumes messages from a given queue and execute tasks 
-according to the content of the messages, writing results into another (specified) queue.
+This project is intended to be as a template worker written in Python. This worker consumes messages from a given queue and execute tasks 
+according to the content of the messages, writing results into another (specified) queue. Typical use cases can be
+time-consuming tasks, such as AI model training tasks. At the moment, _RabbitMQ_, _Ray_ and _Apache Pulsar_ are supported as brokers.
+
+## Mark your own functions as tasks
+In order to register a Python function as a _task_ (so that its execution can be triggered from a message), simply use the decorator *@task* (the implementation is contained into this repo).
 
 ## Install dependencies 
 
@@ -53,7 +57,14 @@ uv sync
 
 ## Launching the application
 
-To start the server, launch the following command:
+In order to launch the entire application (consumer and brokers), you need to install Docker.
+After Docker has been installed and launched, run the following command from project root:
+
+```shell
+docker compose up
+```
+
+If you want to start the consumer locally, launch the following command:
 
 ```shell
 python main.py
