@@ -8,24 +8,26 @@ from src.utilities.logger import logger
 from src.utilities.settings import SETTINGS
 import src.tasks    # Do not remove: it register tasks
 
-logger.info(msg=f"Registered tasks: {'\n\u2022'.join(list(TASKS.keys()))}")
+if __name__ == "__main__":
 
-logger.info(msg=f"Broker type is {SETTINGS.BROKER_TYPE}")
+    logger.info(msg=f"Registered tasks: {'\n\u2022'.join(list(TASKS.keys()))}")
 
-match SETTINGS.BROKER_TYPE:
+    logger.info(msg=f"Broker type is {SETTINGS.BROKER_TYPE}")
 
-    case "rabbitmq":
+    match SETTINGS.BROKER_TYPE:
 
-        RabbitMQConsumer().consume()
+        case "rabbitmq":
 
-    case "ray":
+            RabbitMQConsumer().consume()
 
-        RayConsumer().consume()
+        case "ray":
 
-    case "pulsar":
+            RayConsumer().consume()
 
-        PulsarConsumer().consume()
+        case "pulsar":
 
-    case _:
-        logger.error(msg=f"Broker type {SETTINGS.BROKER_TYPE} not supported. Currently supported brokers: {list(get_args(BROKER_TYPE))}")
-        pass
+            PulsarConsumer().consume()
+
+        case _:
+            logger.error(msg=f"Broker type {SETTINGS.BROKER_TYPE} not supported. Currently supported brokers: {list(get_args(BROKER_TYPE))}")
+            pass

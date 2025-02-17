@@ -3,7 +3,7 @@ from typing import Callable
 
 from src.errors.generic_errors import GenericErrors
 from src.results.result import Result
-from src.utilities.constants import FUNCTIONS
+from src.utilities.constants import TASKS
 from src.utilities.logger import logger
 
 
@@ -24,7 +24,7 @@ class MessageHandler:
 			return Result.fail(error=GenericErrors.missing_function_error())
 
 		# Fetch the function from the mapping
-		function: Callable | None = FUNCTIONS.get(function_name, None)
+		function: Callable | None = TASKS.get(function_name, None)
 
 		if function is None:
 			return Result.fail(error=GenericErrors.function_not_found_error(name=function.__name__))

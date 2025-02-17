@@ -4,7 +4,7 @@ from src.utilities.task_registrator import task
 
 
 @task
-def template_task(*args, **kwargs):
+def sum(*args, **kwargs):
 	"""
 
 	:return:
@@ -13,7 +13,10 @@ def template_task(*args, **kwargs):
 	logger.info(msg="Start")
 	logger.debug(msg=f"Input params: args={args}, kwargs={kwargs}")
 
-	result = 21
+	a: int = kwargs.get("a")
+	b: int = kwargs.get("b")
+
+	result = a + b
 
 	logger.info(msg="End")
 

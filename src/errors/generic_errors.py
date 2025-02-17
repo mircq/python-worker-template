@@ -1,4 +1,4 @@
-from src.domain.errors.error import Error
+from src.errors.error import Error
 
 from src.utilities.logger import logger
 

@@ -27,7 +27,11 @@ class RabbitMQConsumer:
         connection: pika.BlockingConnection = pika.BlockingConnection(
             parameters=pika.ConnectionParameters(
                 host=SETTINGS.BROKER_HOST,
-                port=SETTINGS.BROKER_PORT
+                port=SETTINGS.BROKER_PORT,
+                credentials=pika.PlainCredentials(
+                    username=SETTINGS.BROKER_USER,
+                    password=SETTINGS.BROKER_PASSWORD.get_secret_value()
+                )
             )
         )
 
