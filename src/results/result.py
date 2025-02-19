@@ -1,3 +1,4 @@
+import json
 from typing import TypeVar, Generic
 
 from src.errors.error import Error
@@ -67,3 +68,14 @@ class Result(Generic[T]):
 		:rtype: Result
 		"""
 		return cls(value=value, error=None)
+
+	def __json__(self):
+
+		if self.failed:
+			return {
+				"error": self.error.__json__()
+			}
+		else:
+			return {
+				"value": self.value
+			}

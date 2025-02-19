@@ -7,6 +7,7 @@ from src.utilities.logger import logger
 import pika
 
 from src.utilities.parameters_extractor import MessageHandler
+from src.utilities.serilalizer import Serializer
 from src.utilities.settings import SETTINGS
 
 
@@ -94,7 +95,8 @@ class RabbitMQConsumer:
 
         logger.info(msg="Start")
 
-        response = json.dumps(response).encode(encoding=ENCODING)
+        response = json.dumps(response, default=Serializer.serialize).encode(encoding=ENCODING)
+
         self.channel.basic_publish(
             exchange="",
             routing_key=response_queue,

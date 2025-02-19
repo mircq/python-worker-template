@@ -27,7 +27,7 @@ class MessageHandler:
 		function: Callable | None = TASKS.get(function_name, None)
 
 		if function is None:
-			return Result.fail(error=GenericErrors.function_not_found_error(name=function.__name__))
+			return Result.fail(error=GenericErrors.function_not_found_error(name=function_name))
 
 		args = body.get("args", [])
 		kwargs = body.get("kwargs", {})
