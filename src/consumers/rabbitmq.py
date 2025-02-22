@@ -56,7 +56,7 @@ class RabbitMQConsumer:
 
             function, response_queue, args, kwargs = parsing_result.value
 
-            result = MessageHandler.execute_function(function=function, args=args, kwargs=kwargs)
+            result = MessageHandler.execute_function(function, *args, **kwargs)
 
             logger.info(msg=f"Returning result")
 
@@ -83,7 +83,6 @@ class RabbitMQConsumer:
         self.channel.basic_consume(
             queue=SETTINGS.BROKER_QUEUE,
             on_message_callback=self.callback,
-            auto_ack=True
         )
 
         self.channel.start_consuming()
@@ -96,6 +95,10 @@ class RabbitMQConsumer:
         logger.info(msg="Start")
 
         response = json.dumps(response, default=Serializer.serialize).encode(encoding=ENCODING)
+
+        logger.debug(msg=f"Writing result in queue {response_queue}")
+
+        self.channel.queue_declare(queue=response_queue)
 
         self.channel.basic_publish(
             exchange="",

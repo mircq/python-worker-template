@@ -73,9 +73,9 @@ class Result(Generic[T]):
 
 		if self.failed:
 			return {
-				"error": self.error.__json__()
+				"Error": self.error.__json__()
 			}
 		else:
 			return {
-				"value": self.value
+				"Value": self.value.__json__()
 			}

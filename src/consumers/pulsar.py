@@ -58,7 +58,7 @@ class PulsarConsumer(BaseConsumer):
 
                         function, response_queue, args, kwargs = parsing_result.value
 
-                        result = MessageHandler.execute_function(function=function, args=args, kwargs=kwargs)
+                        result = MessageHandler.execute_function(function, *args, **kwargs)
 
                         self.consumer.acknowledge(message=message)
 

@@ -19,6 +19,6 @@ class Error:
 	def __json__(self):
 
 		return {
-			"message": self.message,
-			"status_code": self.status_code
+			"Message": self.message,
+			"StatusCode": self.status_code
 		}

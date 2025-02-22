@@ -29,18 +29,20 @@ class MessageHandler:
 		if function is None:
 			return Result.fail(error=GenericErrors.function_not_found_error(name=function_name))
 
-		args = body.get("args", [])
+		args = () #body.get("args", ())
 		kwargs = body.get("kwargs", {})
 
 		response_queue = body.get("response_queue", None)
 
 		return Result.ok(value=(function, response_queue, args, kwargs))
 
+	@staticmethod
 	def execute_function(function: Callable, *args, **kwargs):
 		"""
 		Execute a function based on the message content.
 		The message must include 'function_name' and 'args'.
 
+		:param Callable function:
 		:param message:
 		"""
 
