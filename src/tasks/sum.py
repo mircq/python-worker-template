@@ -1,3 +1,5 @@
+from time import sleep
+
 from src.entities.sum_entity import SumEntity
 from src.errors.generic_errors import GenericErrors
 from src.results.result import Result
@@ -22,7 +24,9 @@ def sum(*args, **kwargs):
 		logger.error(msg="Input params not found")
 		return Result.fail(error=GenericErrors.generic_error(details="Input params not found"))
 
-	sum = a + b
+	sum: int = a + b
+
+	sleep(15)
 
 	result: SumEntity = SumEntity(value=sum)
 

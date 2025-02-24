@@ -29,7 +29,7 @@ class MessageHandler:
 		if function is None:
 			return Result.fail(error=GenericErrors.function_not_found_error(name=function_name))
 
-		args = () #body.get("args", ())
+		args = tuple(body.get("args", []))
 		kwargs = body.get("kwargs", {})
 
 		response_queue = body.get("response_queue", None)
